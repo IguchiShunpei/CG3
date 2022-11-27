@@ -200,7 +200,6 @@ void GameScene::Draw()
 	//sprite1->Draw();
 	//sprite2->Draw();
 	debugText.Print("[W][A][S][D] Camera", 20, 20, 1);
-	debugText.Print("   [SPACE]  Particle", 20, 40, 1);
 
 	/// <summary>
 	/// ここに前景スプライトの描画処理を追加できる
