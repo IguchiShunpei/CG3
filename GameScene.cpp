@@ -33,7 +33,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input)
 
 	// テクスチャ読み込み
 	Sprite::LoadTexture(1, L"Resources/background.jpg");
-	Sprite::LoadTexture(2, L"Resources/face.png");
+	Sprite::LoadTexture(2, L"Resources/smoke.png");
 	sprite1 = Sprite::Create(2, { 500.0f,200.0f });
 	sprite2 = Sprite::Create(2, { 500.0f,500.0f }, { 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f,0.0f }, false, true);
 
@@ -108,18 +108,21 @@ void GameScene::Update()
 		else if (input->PushKey(DIK_A)) { Object3d::CameraMoveEyeVector({ -1.0f,0.0f,0.0f }); }
 	}
 
-		// 現在の座標を取得
-		XMFLOAT2 position = sprite1->GetPosition();
+	// 現在の座標を取得
+	XMFLOAT2 position = sprite1->GetPosition();
 
-		// 移動後の座標を計算
-		position.x += 1.0f;
+	// 移動後の座標を計算
+	position.x += 1.0f;
 
-		// 座標の変更を反映
-		sprite1->SetPosition(position);
+	// 座標の変更を反映
+	sprite1->SetPosition(position);
 
-		for (int i = 0; i < 5; i++) {
+	if (input->TriggerKey(DIK_SPACE))
+	{
+		for (int i = 0; i < 10; i++)
+		{
 			// X,Y,Z全て{-5.0f,+5.0f}でランダムに分布
-			const float md_pos = 10.0f;
+			const float md_pos = 3.0f;
 			XMFLOAT3 pos{};
 			pos.x = (float)rand() / RAND_MAX * md_pos - md_pos / 2.0f;
 			pos.y = (float)rand() / RAND_MAX * md_pos - md_pos / 2.0f;
@@ -139,6 +142,7 @@ void GameScene::Update()
 
 			// 追加
 			particleMan->Add(60, pos, vel, acc, 1.0f, 0.0f);
+		}
 	}
 
 
